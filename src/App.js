@@ -37,7 +37,7 @@ export default function App() {
         language="javascript"
         codeBlock
       />
-      <small>with dynamic text</small>
+      <small>using dynamic text prop – will be minified post build</small>
       <br />
       <br />
       <CopyBlock
@@ -62,7 +62,7 @@ export default function App() {
         language="javascript"
         codeBlock
       />
-      <small>with static text</small>
+      <small>using static text – will stay the same post build</small>
       <br />
       <h2>Iterative Example</h2>
       <CopyBlock
@@ -72,6 +72,36 @@ export default function App() {
         language="javascript"
         codeBlock
       />
+      <small>using dynamic text prop – will be minified post build</small>
+      <br />
+      <br />
+      <CopyBlock
+        showLineNumbers={false}
+        theme={toggleCodeTheme}
+        text={`function iterative(arrLength) {
+          var _loopIt = 0;
+          var t0 = performance.now();
+          var arr = [0, 1];
+        
+          for (var i = arr.length; i < arrLength; i++) {
+            if (_loopIt++ > 10001) {
+              var csb_global = typeof window === 'undefined' ? self : window;
+              csb_global.infiniteLoopError = new RangeError('Potential infinite loop: exceeded ' + 10001 + ' iterations. You can disable this check by creating a sandbox.config.json file.');
+              throw csb_global.infiniteLoopError;
+            }
+        
+            var nNum = arr[arr.length - 1] + arr[arr.length - 2];
+            arr.push(nNum);
+          }
+        
+          var t1 = performance.now();
+          return (t1 - t0) * 1000;
+        }`}
+        language="javascript"
+        codeBlock
+      />
+      <small>using static text – will stay the same post build</small>
+      <br />
     </div>
   );
 }
