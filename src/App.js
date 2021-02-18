@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import { CopyBlock, github, hybrid } from "react-code-blocks";
 import { recursive } from "./Recursive";
@@ -5,7 +6,13 @@ import { iterative } from "./Iterative";
 
 export default function App() {
   const toggleCodeTheme = window.innerWidth < 1000 ? hybrid : github;
-
+  const [state, setState] = useState({ rtext: "", itext: "" });
+  useEffect(() => {
+    setState({
+      rtext: recursive.toString(),
+      itext: iterative.toString()
+    });
+  }, [setState]);
   return (
     <div className="App">
       <h1>
@@ -26,7 +33,7 @@ export default function App() {
       <CopyBlock
         showLineNumbers={false}
         theme={toggleCodeTheme}
-        text={recursive.toString()}
+        text={state.rtext}
         language="javascript"
         codeBlock
       />
@@ -35,7 +42,7 @@ export default function App() {
       <CopyBlock
         showLineNumbers={false}
         theme={toggleCodeTheme}
-        text={iterative.toString()}
+        text={state.itext}
         language="javascript"
         codeBlock
       />
